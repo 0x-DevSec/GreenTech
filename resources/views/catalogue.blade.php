@@ -282,21 +282,22 @@ body {
         </div>
     </div>
 
-            <div class="products-grid">
-                @foreach ($myproduct as $myproduct)
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="{{ $myproduct->image_url }}">
-                        </div>
-                        <div class="product-info">
-                            <div class="product-category">{{ $data->category->name ?? 'Non définie' }}</div>
-                            <div class="product-name">{{ $myproduct->name }}</div>
-                            <div class="product-price">{{ $myproduct->price }} MAD</div>
-                            <a href="#" class="btn-view">Voir le produit</a>
-                        </div>
-                    </div>
-                @endforeach
+ <div class="products-grid">
+    @foreach ($myproduct as $myproduct)
+        <div class="product-card">
+            <div class="product-image">
+                <img src="{{ $myproduct->image_url }}" alt="{{ $myproduct->name }}">
             </div>
+            <div class="product-info">
+                <div class="product-category">{{ $myproduct->category->name ?? 'Non définie' }}</div>
+                <div class="product-name">{{ $myproduct->name }}</div>
+                <div class="product-price">{{ $myproduct->price }} MAD</div>
+                <a href="{{ route('product.show', $myproduct->id) }}" class="btn-view">Voir le produit</a>
+            </div>
+        </div>
+    @endforeach
+</div>
+
 
     </div>
 </body>

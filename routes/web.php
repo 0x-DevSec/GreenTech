@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Pest\Support\View;
 
 Route::get('/',[ProductController::class , 'home']);
-Route::get('/catalogue',[ProductController::class, 'list']);
+Route::get('/catalogue',[ProductController::class, 'list'])->name('mylist');
 
 Route::get('/add',[ProductController::class, 'add']);
 Route::post('/add',[ProductController::class, 'create']);
@@ -19,6 +19,8 @@ Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('pro
 Route::post('/products/{id}/update', [ProductController::class, 'update'])->name('products.update');
 Route::get('/products/{id}/delete', [ProductController::class, 'destroy']);
 Route::delete('/products/{id}/delete', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
 
 
 

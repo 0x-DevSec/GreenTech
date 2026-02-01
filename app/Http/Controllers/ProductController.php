@@ -15,14 +15,15 @@ class ProductController extends Controller
         return view('welcome');
     }
 
-    // list product
-    public function list()
-    {
-        $data = DB::table('products')->get();
-        return view('catalogue',[
-            'myproduct' => $data
-        ]);
-    }
+    
+ public function list()
+{
+    // Paginate 10 products per page, load categories
+    $myproduct = Product::with('category')->paginate(10);
+
+    return view('catalogue', compact('myproduct'));
+}
+
 
     // add product page
     public function add()
@@ -97,6 +98,24 @@ class ProductController extends Controller
             // redirect back to admin dashboard
             return redirect()->route('admin')->with('success', 'Produit supprimé avec succès.');
         }
+
+
+        // show product details
+            public function show($id)
+            {
+                // get the product by id with its category
+                $product = Product::with('category')->find($id);
+
+                // check if product exists
+                if (!$product) {
+                    return redirect()->route('catalogue')->with('error', 'Product not found');
+                }
+
+                return view('details', [
+                    'product' => $product
+                ]);
+            }
+
 
 
 
